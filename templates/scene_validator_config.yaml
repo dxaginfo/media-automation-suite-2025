@@ -1,0 +1,106 @@
+# SceneValidator Configuration Template
+# ================================
+#
+# This configuration file controls the behavior of the SceneValidator tool.
+# Adjust settings to match your project's specific requirements.
+
+# Project Settings
+project:
+  name: "my_project"                      # Project name
+  description: "Example media project"    # Project description
+  media_type: "video"                     # Type of media (video, animation, game)
+
+# Firebase Settings
+firebase:
+  enabled: true                           # Whether to use Firebase for storage
+  collection: "projects"                  # Firebase collection name
+  document_id: "auto"                     # Firebase document ID (auto = generate)
+
+# Google Cloud Settings
+google_cloud:
+  project_id: "my-gcp-project"            # Google Cloud project ID
+  vision_api:
+    enabled: true                         # Use Vision API
+    features:                             # Vision API features to use
+      - OBJECT_LOCALIZATION
+      - FACE_DETECTION
+      - LANDMARK_DETECTION
+      - LOGO_DETECTION
+      - LABEL_DETECTION
+      - IMAGE_PROPERTIES
+    max_results: 20                       # Maximum results per feature
+
+# Gemini API Settings
+gemini_api:
+  enabled: true                           # Use Gemini API
+  model: "gemini-pro-vision"              # Gemini model to use
+  max_tokens: 1024                        # Maximum tokens to generate
+  temperature: 0.4                        # Sampling temperature (0.0-1.0)
+
+# Validation Settings
+validation:
+  # Continuity Validation
+  continuity:
+    enabled: true                         # Enable continuity validation
+    object_persistence: true              # Check if objects persist between scenes
+    character_positioning: true           # Check character positioning between scenes
+    lighting_consistency: true            # Check lighting consistency
+    color_palette_consistency: true       # Check color palette consistency
+    time_of_day_consistency: true         # Check time of day consistency
+    
+    # Sensitivity settings (higher = more sensitive)
+    sensitivity:
+      object_detection: 0.7               # Object detection confidence threshold
+      character_position_change: 0.4      # Character position change threshold (0.0-1.0)
+      lighting_change: 0.3                # Lighting change threshold (0.0-1.0)
+      color_palette_change: 0.2           # Color palette change threshold (0.0-1.0)
+  
+  # Composition Validation
+  composition:
+    enabled: true                         # Enable composition validation
+    rule_of_thirds: true                  # Check rule of thirds
+    headroom: true                        # Check headroom
+    leading_space: true                   # Check leading space
+    framing_balance: true                 # Check framing balance
+    
+    # Sensitivity settings
+    sensitivity:
+      rule_of_thirds_distance: 0.1        # Rule of thirds distance threshold (0.0-1.0)
+      headroom_ratio: 0.15                # Headroom ratio threshold (0.0-1.0)
+      leading_space_ratio: 0.2            # Leading space ratio threshold (0.0-1.0)
+
+# Reporting Settings
+reporting:
+  default_format: "pdf"                   # Default report format (pdf, html, txt)
+  include_thumbnails: true                # Include thumbnails in report
+  highlight_issues: true                  # Highlight issues on thumbnails
+  max_issues_per_scene: 10                # Maximum issues to report per scene
+  severity_threshold: "Low"               # Minimum severity to include (Low, Medium, High)
+
+# Integration Settings
+integration:
+  storyboard_gen:
+    enabled: true                         # Enable StoryboardGen integration
+    api_endpoint: "http://localhost:5001/storyboard-gen/api"
+    
+  continuity_tracker:
+    enabled: true                         # Enable ContinuityTracker integration
+    api_endpoint: "http://localhost:5002/continuity-tracker/api"
+    
+  environment_tagger:
+    enabled: true                         # Enable EnvironmentTagger integration
+    api_endpoint: "http://localhost:5003/environment-tagger/api"
+
+# Performance Settings
+performance:
+  parallel_processing: true               # Use parallel processing
+  max_workers: 4                          # Maximum worker processes
+  cache_results: true                     # Cache intermediate results
+  cache_ttl: 3600                         # Cache time-to-live (seconds)
+
+# Logging Settings
+logging:
+  level: "INFO"                           # Logging level (DEBUG, INFO, WARNING, ERROR)
+  file: "scene_validator.log"             # Log file path
+  max_size: 10                            # Maximum log file size (MB)
+  backup_count: 5                         # Number of backup logs to keep
